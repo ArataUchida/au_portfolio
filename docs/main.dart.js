@@ -82183,7 +82183,7 @@ return new A.OY(new A.bD(null,t.am),new A.tU(B.ho,s),new A.tU(B.ho,s),new A.tU(B
 A.OY.prototype={
 qh(){var s=0,r=A.U(t.H),q=this,p,o,n,m,l,k,j,i,h
 var $async$qh=A.Q(function(a,b){if(a===1)return A.R(b,r)
-while(true)switch(s){case 0:k=A.aGX("POST",A.hd("http://192.168.1.10:8000/send_mail/",0,null))
+while(true)switch(s){case 0:k=A.aGX("POST",A.hd("http://192.0.0.2:8000/send_mail/",0,null))
 j=k.x
 i=q.e
 j.m(0,"name",i.a.a)
