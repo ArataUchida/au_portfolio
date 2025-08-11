@@ -16,7 +16,7 @@ class _ContactPageState extends State<ContactPage> {
   final _commentController = TextEditingController();
 
   Future<void> sendEmail() async {
-    final url = Uri.parse('http://192.0.0.2:8000/send_mail/');
+    final url = Uri.parse('https://portfolio-contact-backend-140388ed23c9.herokuapp.com/send_mail/');
 
     final request = http.MultipartRequest('POST', url);
     request.fields['name'] = _nameController.text;
