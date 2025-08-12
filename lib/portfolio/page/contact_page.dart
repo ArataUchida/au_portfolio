@@ -74,54 +74,61 @@ class _ContactPageState extends State<ContactPage> {
                   '最後までご覧いただきありがとうございます。',
                   style: TextStyle(color: Colors.black),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // 名前
-                    SizedBox(
-                      width: 250,
-                      child: Padding(
-                        padding: const EdgeInsets.all(30),
-                        child: TextFormField(
-                          controller: _nameController,
-                          style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Name',
-                            border: OutlineInputBorder(),
+  
+                // 名前 + メールアドレス（画面幅に応じて横並び/縦並び切替）
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    bool isWide = constraints.maxWidth > 600; // 横幅600px以上なら横並び
+                    return Flex(
+                      direction: isWide ? Axis.horizontal : Axis.vertical,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SizedBox(
+                          width: isWide ? 250 : double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(30),
+                            child: TextFormField(
+                              controller: _nameController,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
+                                labelText: 'Name',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return '名前を入力してください';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return '名前を入力してください';
-                            }
-                            return null;
-                          },
                         ),
-                      ),
-                    ),
-                    // メールアドレス
-                    SizedBox(
-                      width: 250,
-                      child: Padding(
-                        padding: const EdgeInsets.all(30),
-                        child: TextFormField(
-                          controller: _emailController,
-                          style: const TextStyle(color: Colors.black),
-                          decoration: const InputDecoration(
-                            labelText: 'Mail Address',
-                            border: OutlineInputBorder(),
+                        SizedBox(
+                          width: isWide ? 250 : double.infinity,
+                          child: Padding(
+                            padding: const EdgeInsets.all(30),
+                            child: TextFormField(
+                              controller: _emailController,
+                              style: const TextStyle(color: Colors.black),
+                              decoration: const InputDecoration(
+                                labelText: 'Mail Address',
+                                border: OutlineInputBorder(),
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'メールアドレスを入力してください';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'メールアドレスを入力してください';
-                            }
-                            return null;
-                          },
                         ),
-                      ),
-                    ),
-                  ],
+                      ],
+                    );
+                  },
                 ),
-                // コメント
+  
+                // コメント欄（幅は画面サイズに合わせる）
                 SizedBox(
                   width: 500,
                   child: Padding(
@@ -143,6 +150,7 @@ class _ContactPageState extends State<ContactPage> {
                     ),
                   ),
                 ),
+  
                 const SizedBox(height: 100),
                 ElevatedButton(
                   onPressed: () {
