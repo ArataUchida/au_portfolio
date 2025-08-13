@@ -31,82 +31,78 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const Text(
-              '経歴 / ストーリー',
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
-            ),
-            const SizedBox(height: 20),
-            const Text(
-              '整体師 → 施工管理 → エンジニアという異業種転職。\n'
-              '現場で鍛えた課題発見力と改善意識をエンジニアリングに活かしています。\n'
-              '人の課題を解決する「仕組み」を作りたいと考え、現在に至ります。',
-              textAlign: TextAlign.left,
-              style: TextStyle(color: Colors.black87, fontSize: 16),
-            ),
-            const SizedBox(height: 40),
+    return Column(
+      children: [
+        const Text(
+          '経歴 / ストーリー',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+        const SizedBox(height: 20),
+        const Text(
+          '整体師 → 施工管理 → エンジニアという異業種転職。\n'
+          '現場で鍛えた課題発見力と改善意識をエンジニアリングに活かしています。\n'
+          '人の課題を解決する「仕組み」を作りたいと考え、現在に至ります。',
+          textAlign: TextAlign.left,
+          style: TextStyle(color: Colors.black87, fontSize: 16),
+        ),
+        const SizedBox(height: 40),
 
-            // 年ごとのプロフィールを表示
-            ...List.generate(profiles.length, (index) {
-              final profile = profiles[index];
-              final isVisible = visibleIndexes.contains(index);
+        // 年ごとのプロフィールを表示
+        ...List.generate(profiles.length, (index) {
+          final profile = profiles[index];
+          final isVisible = visibleIndexes.contains(index);
 
-              return VisibilityDetector(
-                key: Key('year-profile-$index'),
-                onVisibilityChanged: (info) {
-                  if (info.visibleFraction > 0.8 && !visibleIndexes.contains(index)) {
-                    setState(() {
-                      visibleIndexes.add(index);
-                    });
-                  }
-                },
-                child: AnimatedSlide(
-                  duration: const Duration(milliseconds: 600),
-                  offset: isVisible ? Offset.zero : const Offset(1.5, 0),
-                  curve: Curves.easeOut,
-                  child: AnimatedOpacity(
-                    duration: const Duration(milliseconds: 600),
-                    opacity: isVisible ? 1.0 : 0.0,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(vertical: 12),
-                      padding: const EdgeInsets.all(16),
-                      decoration: BoxDecoration(
-                        color: Colors.blue[50],
-                        borderRadius: BorderRadius.circular(12),
-                        border: Border.all(color: Colors.blue),
+          return VisibilityDetector(
+            key: Key('year-profile-$index'),
+            onVisibilityChanged: (info) {
+              if (info.visibleFraction > 0.8 && !visibleIndexes.contains(index)) {
+                setState(() {
+                  visibleIndexes.add(index);
+                });
+              }
+            },
+            child: AnimatedSlide(
+              duration: const Duration(milliseconds: 600),
+              offset: isVisible ? Offset.zero : const Offset(1.5, 0),
+              curve: Curves.easeOut,
+              child: AnimatedOpacity(
+                duration: const Duration(milliseconds: 600),
+                opacity: isVisible ? 1.0 : 0.0,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Colors.blue[50],
+                    borderRadius: BorderRadius.circular(12),
+                    border: Border.all(color: Colors.blue),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        profile.year,
+                        style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.blue),
                       ),
-                      child: Row(
-                        children: [
-                          Text(
-                            profile.year,
-                            style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.blue),
-                          ),
-                          const SizedBox(width: 12),
-                          Expanded(
-                            child: Text(
-                              profile.description,
-                              style: const TextStyle(fontSize: 16, color: Colors.black),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                      const SizedBox(width: 12),
+                      Flexible(
+                      fit: FlexFit.loose,
+                        child: Text(
+                          profile.description,
+                          style: const TextStyle(fontSize: 16, color: Colors.black),
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              );
-            }),
-            const SizedBox(height: 60),
-          ],
-        ),
-      ),
+              ),
+            ),
+          );
+        }),
+        const SizedBox(height: 60),
+      ],
     );
   }
 }

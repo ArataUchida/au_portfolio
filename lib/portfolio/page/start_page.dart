@@ -1,41 +1,3 @@
-//import 'package:flutter/material.dart';
-//
-//class StartPage extends StatelessWidget{
-//  const StartPage({super.key});
-//
-//  @override
-//  Widget build(BuildContext context){
-//    return Scaffold(
-//      backgroundColor: Colors.blueAccent,
-//      body:SingleChildScrollView(
-//        padding: EdgeInsets.all(10),
-//        child: Center(
-//          child: Container(
-//            padding: EdgeInsets.all(12),
-//            child: Column(
-//              mainAxisSize: MainAxisSize.min,
-//              children: [
-//                Text('Welcome to my portfolio！', 
-//                  style: TextStyle(fontSize: 40,fontWeight: FontWeight.bold),
-//                ),
-//                Container(
-//                  color: Colors.blue,
-//                    child: Image.asset(
-//                    'assets/三毛猫イラスト.png',
-//                    width: 200,
-//                    height: 200,
-//                    fit: BoxFit.cover,
-//                  ),
-//                )
-//              ],
-//            ),
-//          ),
-//        ),
-//      )
-//    );
-//  }
-//}
-
 import 'dart:async';
 import 'package:flutter/material.dart';
 
@@ -84,7 +46,7 @@ class _StartPageState extends State<StartPage> {
             key: ValueKey(_backgroundImages[_currentIndex]),
             fit: BoxFit.contain, 
             width: double.infinity,
-            height: double.infinity,
+            height: MediaQuery.of(context).size.height,
             alignment: Alignment.center, 
           ),
         ),
